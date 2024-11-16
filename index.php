@@ -1,40 +1,3 @@
-<?php
-// Menangani proses upload file
-if (isset($_POST['submit'])) {
-    $targetDir = "uploads/";
-    $targetFile = $targetDir . basename($_FILES["file"]["name"]);
-    $uploadOk = 1;
-    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-    // Cek apakah file sudah ada
-    if (file_exists($targetFile)) {
-        echo "File sudah ada.";
-        $uploadOk = 0;
-    }
-
-    // Cek ukuran file
-    if ($_FILES["file"]["size"] > 5000000) { // Maksimal 5MB
-        echo "Maaf, file terlalu besar.";
-        $uploadOk = 0;
-    }
-
-    // Cek tipe file (gambar atau video)
-    if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "gif" && $fileType != "mp4" && $fileType != "avi" && $fileType != "mov") {
-        echo "Maaf, hanya file gambar atau video yang diperbolehkan.";
-        $uploadOk = 0;
-    }
-
-    // Jika semuanya oke, upload file
-    if ($uploadOk == 1) {
-        if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
-            echo "File ". basename($_FILES["file"]["name"]). " telah diupload.";
-        } else {
-            echo "Terjadi kesalahan saat mengupload file.";
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -95,29 +58,43 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="container">
         <h1>Upload Video atau Gambar</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*, video/*" required>
-            <button type="submit" name="submit">Upload</button>
+        <form id="uploadForm">
+            <input type="file" id="fileInput" accept="image/*, video/*" required>
+            <button type="submit">Upload</button>
         </form>
 
-        <div class="media">
-            <!-- Media yang telah diupload akan ditampilkan di sini -->
-            <?php
-                // Menampilkan file yang ada di folder uploads
-                $files = glob("uploads/*");
-                foreach($files as $file) {
-                    $file_extension = pathinfo($file, PATHINFO_EXTENSION);
-                    if (in_array($file_extension, ['mp4', 'avi', 'mov'])) {
-                        echo '<video width="320" height="240" autoplay muted loop>
-                                <source src="'.$file.'" type="video/'.$file_extension.'">
-                                Your browser does not support the video tag.
-                              </video>';
-                    } else {
-                        echo '<img src="'.$file.'" alt="Uploaded Image">';
-                    }
-                }
-            ?>
-        </div>
+        <div class="media" id="mediaContainer"></div>
     </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let file = document.getElementById('fileInput').files[0];
+            if (!file) return;
+
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                let mediaContainer = document.getElementById('mediaContainer');
+                let fileType = file.type.split('/')[0];
+
+                if (fileType === 'image') {
+                    let img = document.createElement('img');
+                    img.src = event.target.result;
+                    mediaContainer.innerHTML = ''; // Clear previous media
+                    mediaContainer.appendChild(img);
+                } else if (fileType === 'video') {
+                    let video = document.createElement('video');
+                    video.src = event.target.result;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+                    mediaContainer.innerHTML = ''; // Clear previous media
+                    mediaContainer.appendChild(video);
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
 </body>
 </html>
