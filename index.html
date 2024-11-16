@@ -3,69 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoTab Multiple Instances</title>
+    <title>Crypto Mining Dashboard</title>
     <style>
         body {
-            background-color: black;
-            color: white;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
             margin: 0;
-            padding: 10px;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 devices per row */
-            gap: 10px;
+            padding: 0;
         }
-
-        .device-container {
-            width: 100%;
-            height: 300px;
-            background-color: #2d2d2d;
+        h1 {
+            color: #333;
+            padding-top: 20px;
+        }
+        .dashboard {
+            background-color: #fff;
+            padding: 20px;
             border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            margin: 20px auto;
+        }
+        .stats {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            justify-content: space-around;
+            margin-top: 10px;
         }
-
-        iframe {
-            width: 90%;
-            height: 90%;
-            border: none;
-            border-radius: 10px;
+        .stats div {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            width: 30%;
         }
-
-        /* Responsif untuk perangkat kecil */
-        @media (max-width: 768px) {
-            body {
-                grid-template-columns: repeat(2, 1fr); /* 2 devices per row */
-            }
+        .referral {
+            margin-top: 20px;
+            background-color: #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        @media (max-width: 480px) {
-            body {
-                grid-template-columns: 1fr; /* 1 device per row */
-            }
+        .referral a {
+            color: #4CAF50;
+            font-weight: bold;
+            text-decoration: none;
         }
-
     </style>
 </head>
 <body>
-    <!-- Download Link for CryptoTab Browser -->
-    <div class="device-container">
-        <a href="https://cryptotabbrowser.com/40798219" target="_blank">
-            <img src="images/crypto-tab-image.jpg" alt="Download CryptoTab">
-        </a>
+    <h1>Selamat datang di Dashboard Crypto Mining</h1>
+    <div class="dashboard">
+        <h2>Statistik Mining Anda</h2>
+        <div class="stats">
+            <div>
+                <h3>Pendapatan</h3>
+                <p id="earnings">0.00 BTC</p>
+            </div>
+            <div>
+                <h3>Hashrate</h3>
+                <p id="hashrate">1000 H/s</p>
+            </div>
+            <div>
+                <h3>Waktu Tertunda</h3>
+                <p id="pending">0.00 BTC</p>
+            </div>
+        </div>
+        <div class="referral">
+            <h3>Link Referral Anda</h3>
+            <p><a href="https://cryptotabbrowser.com/40798219" target="_blank">Klik untuk mengundang teman dan mulai menambang</a></p>
+        </div>
     </div>
-    <!-- Repeat for 10 devices -->
-    <div class="device-container">
-        <a href="https://cryptotabbrowser.com/40798219" target="_blank">
-            <img src="images/crypto-tab-image.jpg" alt="Download CryptoTab">
-        </a>
-    </div>
-    <div class="device-container">
-        <a href="https://cryptotabbrowser.com/40798219" target="_blank">
-            <img src="images/crypto-tab-image.jpg" alt="Download CryptoTab">
-        </a>
-    </div>
-    <!-- Continue for other containers -->
+
+    <script>
+        // Simulasi update data mining setiap 5 detik
+        setInterval(function() {
+            // Dapatkan nilai acak untuk pendapatan dan hashrate
+            const earnings = (Math.random() * 0.05).toFixed(4); // Nilai acak 0.0000 - 0.0500 BTC
+            const hashrate = (Math.random() * 5000).toFixed(0); // Nilai acak 0 - 5000 H/s
+            const pending = (Math.random() * 0.01).toFixed(4); // Nilai acak 0.0000 - 0.0100 BTC
+
+            // Update elemen dengan ID yang sesuai
+            document.getElementById('earnings').textContent = earnings + " BTC";
+            document.getElementById('hashrate').textContent = hashrate + " H/s";
+            document.getElementById('pending').textContent = pending + " BTC";
+        }, 5000);
+    </script>
 </body>
 </html>
