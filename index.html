@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Mining Dashboard</title>
+    <title>CryptoTab Mining Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -16,33 +16,38 @@
             color: #333;
             padding-top: 20px;
         }
-        .dashboard {
+        .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .mining-instance {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            width: 60%;
-            margin: 20px auto;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .mining-instance h3 {
+            color: #333;
         }
         .stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         .stats div {
-            background-color: #e0e0e0;
+            background-color: #f0f0f0;
             padding: 10px;
+            margin: 5px 0;
             border-radius: 5px;
-            width: 30%;
         }
-        .referral {
+        .referral-link {
             margin-top: 20px;
-            background-color: #ddd;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
         }
-        .referral a {
+        .referral-link a {
             color: #4CAF50;
             font-weight: bold;
             text-decoration: none;
@@ -50,42 +55,141 @@
     </style>
 </head>
 <body>
-    <h1>Selamat datang di Dashboard Crypto Mining</h1>
-    <div class="dashboard">
-        <h2>Statistik Mining Anda</h2>
-        <div class="stats">
-            <div>
-                <h3>Pendapatan</h3>
-                <p id="earnings">0.00 BTC</p>
+
+    <h1>CryptoTab Mining Dashboard (10 Instances)</h1>
+
+    <div class="container">
+        <!-- Instance 1 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 1</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0001 BTC</div>
+                <div><strong>Hashrate:</strong> 500 H/s</div>
+                <div><strong>Pending:</strong> 0.0000 BTC</div>
             </div>
-            <div>
-                <h3>Hashrate</h3>
-                <p id="hashrate">1000 H/s</p>
-            </div>
-            <div>
-                <h3>Waktu Tertunda</h3>
-                <p id="pending">0.00 BTC</p>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798219" target="_blank">Link Referral Instance 1</a>
             </div>
         </div>
-        <div class="referral">
-            <h3>Link Referral Anda</h3>
-            <p><a href="https://cryptotabbrowser.com/40798219" target="_blank">Klik untuk mengundang teman dan mulai menambang</a></p>
+
+        <!-- Instance 2 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 2</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0003 BTC</div>
+                <div><strong>Hashrate:</strong> 450 H/s</div>
+                <div><strong>Pending:</strong> 0.0001 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798220" target="_blank">Link Referral Instance 2</a>
+            </div>
         </div>
+
+        <!-- Instance 3 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 3</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0004 BTC</div>
+                <div><strong>Hashrate:</strong> 400 H/s</div>
+                <div><strong>Pending:</strong> 0.0002 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798221" target="_blank">Link Referral Instance 3</a>
+            </div>
+        </div>
+
+        <!-- Instance 4 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 4</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0005 BTC</div>
+                <div><strong>Hashrate:</strong> 350 H/s</div>
+                <div><strong>Pending:</strong> 0.0002 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798222" target="_blank">Link Referral Instance 4</a>
+            </div>
+        </div>
+
+        <!-- Instance 5 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 5</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0007 BTC</div>
+                <div><strong>Hashrate:</strong> 600 H/s</div>
+                <div><strong>Pending:</strong> 0.0004 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798223" target="_blank">Link Referral Instance 5</a>
+            </div>
+        </div>
+
+        <!-- Instance 6 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 6</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0002 BTC</div>
+                <div><strong>Hashrate:</strong> 550 H/s</div>
+                <div><strong>Pending:</strong> 0.0001 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798224" target="_blank">Link Referral Instance 6</a>
+            </div>
+        </div>
+
+        <!-- Instance 7 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 7</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0003 BTC</div>
+                <div><strong>Hashrate:</strong> 450 H/s</div>
+                <div><strong>Pending:</strong> 0.0001 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798225" target="_blank">Link Referral Instance 7</a>
+            </div>
+        </div>
+
+        <!-- Instance 8 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 8</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0004 BTC</div>
+                <div><strong>Hashrate:</strong> 400 H/s</div>
+                <div><strong>Pending:</strong> 0.0002 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798226" target="_blank">Link Referral Instance 8</a>
+            </div>
+        </div>
+
+        <!-- Instance 9 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 9</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0006 BTC</div>
+                <div><strong>Hashrate:</strong> 600 H/s</div>
+                <div><strong>Pending:</strong> 0.0003 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798227" target="_blank">Link Referral Instance 9</a>
+            </div>
+        </div>
+
+        <!-- Instance 10 -->
+        <div class="mining-instance">
+            <h3>CryptoTab Instance 10</h3>
+            <div class="stats">
+                <div><strong>Pendapatan:</strong> 0.0007 BTC</div>
+                <div><strong>Hashrate:</strong> 700 H/s</div>
+                <div><strong>Pending:</strong> 0.0005 BTC</div>
+            </div>
+            <div class="referral-link">
+                <a href="https://cryptotabbrowser.com/40798228" target="_blank">Link Referral Instance 10</a>
+            </div>
+        </div>
+
     </div>
 
-    <script>
-        // Simulasi update data mining setiap 5 detik
-        setInterval(function() {
-            // Dapatkan nilai acak untuk pendapatan dan hashrate
-            const earnings = (Math.random() * 0.05).toFixed(4); // Nilai acak 0.0000 - 0.0500 BTC
-            const hashrate = (Math.random() * 5000).toFixed(0); // Nilai acak 0 - 5000 H/s
-            const pending = (Math.random() * 0.01).toFixed(4); // Nilai acak 0.0000 - 0.0100 BTC
-
-            // Update elemen dengan ID yang sesuai
-            document.getElementById('earnings').textContent = earnings + " BTC";
-            document.getElementById('hashrate').textContent = hashrate + " H/s";
-            document.getElementById('pending').textContent = pending + " BTC";
-        }, 5000);
-    </script>
 </body>
 </html>
