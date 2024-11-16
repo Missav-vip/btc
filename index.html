@@ -1,117 +1,123 @@
+<?php
+// Menangani proses upload file
+if (isset($_POST['submit'])) {
+    $targetDir = "uploads/";
+    $targetFile = $targetDir . basename($_FILES["file"]["name"]);
+    $uploadOk = 1;
+    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Cek apakah file sudah ada
+    if (file_exists($targetFile)) {
+        echo "File sudah ada.";
+        $uploadOk = 0;
+    }
+
+    // Cek ukuran file
+    if ($_FILES["file"]["size"] > 5000000) { // Maksimal 5MB
+        echo "Maaf, file terlalu besar.";
+        $uploadOk = 0;
+    }
+
+    // Cek tipe file (gambar atau video)
+    if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "gif" && $fileType != "mp4" && $fileType != "avi" && $fileType != "mov") {
+        echo "Maaf, hanya file gambar atau video yang diperbolehkan.";
+        $uploadOk = 0;
+    }
+
+    // Jika semuanya oke, upload file
+    if ($uploadOk == 1) {
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
+            echo "File ". basename($_FILES["file"]["name"]). " telah diupload.";
+        } else {
+            echo "Terjadi kesalahan saat mengupload file.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoTab Max Dashboard</title>
+    <title>Upload Media</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-        }
-
-        h1 {
-            color: #4CAF50;
-            margin-top: 20px;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
         }
 
         .container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-            width: 90%;
-            padding: 20px;
-        }
-
-        .mining-instance {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
             text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .mining-instance h3 {
-            color: #333;
+        h1 {
+            margin-bottom: 20px;
         }
 
-        .stats {
-            margin-top: 20px;
+        form input[type="file"] {
+            margin-bottom: 20px;
         }
 
-        .stats div {
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin: 5px 0;
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
         }
 
-        .referral-link {
-            margin-top: 20px;
+        button:hover {
+            background-color: #45a049;
         }
 
-        .referral-link a {
-            color: #4CAF50;
-            text-decoration: none;
-            font-weight: bold;
+        .media {
+            margin-top: 30px;
+        }
+
+        img, video {
+            margin: 10px;
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-
-    <h1>CryptoTab Max Mining Dashboard</h1>
-
     <div class="container">
-        <!-- Mining Instance 1 -->
-        <div class="mining-instance">
-            <h3>CryptoTab Max 1</h3>
-            <div class="stats">
-                <div><strong>Pendapatan:</strong> 0.0002 BTC</div>
-                <div><strong>Hashrate:</strong> 800 H/s</div>
-                <div><strong>Pending:</strong> 0.00005 BTC</div>
-            </div>
-            <div class="referral-link">
-                <a href="https://cryptotabbrowser.com/40798219" target="_blank">Referral Link</a>
-            </div>
+        <h1>Upload Video atau Gambar</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*, video/*" required>
+            <button type="submit" name="submit">Upload</button>
+        </form>
+
+        <div class="media">
+            <!-- Media yang telah diupload akan ditampilkan di sini -->
+            <?php
+                // Menampilkan file yang ada di folder uploads
+                $files = glob("uploads/*");
+                foreach($files as $file) {
+                    $file_extension = pathinfo($file, PATHINFO_EXTENSION);
+                    if (in_array($file_extension, ['mp4', 'avi', 'mov'])) {
+                        echo '<video width="320" height="240" autoplay muted loop>
+                                <source src="'.$file.'" type="video/'.$file_extension.'">
+                                Your browser does not support the video tag.
+                              </video>';
+                    } else {
+                        echo '<img src="'.$file.'" alt="Uploaded Image">';
+                    }
+                }
+            ?>
         </div>
-
-        <!-- Mining Instance 2 -->
-        <div class="mining-instance">
-            <h3>CryptoTab Max 2</h3>
-            <div class="stats">
-                <div><strong>Pendapatan:</strong> 0.0005 BTC</div>
-                <div><strong>Hashrate:</strong> 850 H/s</div>
-                <div><strong>Pending:</strong> 0.0001 BTC</div>
-            </div>
-            <div class="referral-link">
-                <a href="https://cryptotabbrowser.com/40798220" target="_blank">Referral Link</a>
-            </div>
-        </div>
-
-        <!-- Mining Instance 3 -->
-        <div class="mining-instance">
-            <h3>CryptoTab Max 3</h3>
-            <div class="stats">
-                <div><strong>Pendapatan:</strong> 0.0001 BTC</div>
-                <div><strong>Hashrate:</strong> 780 H/s</div>
-                <div><strong>Pending:</strong> 0.00002 BTC</div>
-            </div>
-            <div class="referral-link">
-                <a href="https://cryptotabbrowser.com/40798221" target="_blank">Referral Link</a>
-            </div>
-        </div>
-
-        <!-- Other instances would follow the same structure -->
-        <!-- Mining Instance 4 to 10 -->
-
     </div>
-
 </body>
 </html>
