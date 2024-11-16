@@ -3,73 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10 HP CryptoTab</title>
+    <title>CryptoTab Multiple Instances</title>
     <style>
         body {
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 10px;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);  /* Membagi menjadi 5 kolom */
+            grid-template-columns: repeat(5, 1fr); /* 5 devices per row */
             gap: 10px;
-            padding: 20px;
+        }
+
+        .device-container {
+            width: 100%;
+            height: 300px;
+            background-color: #2d2d2d;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         iframe {
-            width: 100%;
-            height: 300px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            width: 90%;
+            height: 90%;
+            border: none;
+            border-radius: 10px;
         }
 
-        .device {
-            padding: 10px;
-            background-color: #f4f4f4;
-            border-radius: 8px;
+        /* Responsif untuk perangkat kecil */
+        @media (max-width: 768px) {
+            body {
+                grid-template-columns: repeat(2, 1fr); /* 2 devices per row */
+            }
         }
 
-        h3 {
-            text-align: center;
+        @media (max-width: 480px) {
+            body {
+                grid-template-columns: 1fr; /* 1 device per row */
+            }
         }
+
     </style>
 </head>
 <body>
-    <div class="device">
-        <h3>HP 1</h3>
-        <iframe src="https://cryptotabbrowser.com/40798219"></iframe>
+    <!-- 10 instances of CryptoTab (Simulated) -->
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 1"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 2</h3>
-        <iframe src="https://cryptotabbrowser.com/40798220"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 2"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 3</h3>
-        <iframe src="https://cryptotabbrowser.com/40798221"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 3"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 4</h3>
-        <iframe src="https://cryptotabbrowser.com/40798222"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 4"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 5</h3>
-        <iframe src="https://cryptotabbrowser.com/40798223"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 5"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 6</h3>
-        <iframe src="https://cryptotabbrowser.com/40798224"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 6"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 7</h3>
-        <iframe src="https://cryptotabbrowser.com/40798225"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 7"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 8</h3>
-        <iframe src="https://cryptotabbrowser.com/40798226"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 8"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 9</h3>
-        <iframe src="https://cryptotabbrowser.com/40798227"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 9"></iframe>
     </div>
-    <div class="device">
-        <h3>HP 10</h3>
-        <iframe src="https://cryptotabbrowser.com/40798228"></iframe>
+    <div class="device-container">
+        <iframe src="https://cryptobrowser.site/cdn/mobile-app" title="CryptoTab Device 10"></iframe>
     </div>
 </body>
 </html>
