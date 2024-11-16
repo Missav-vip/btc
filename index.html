@@ -8,22 +8,28 @@
 <body>
     <h1>Saldo CryptoTab: <span id="saldo">Loading...</span></h1>
 
+    <input type="text" id="user_id" placeholder="Masukkan User ID" value="40798219" />
+    <button onclick="fetchSaldo()">Lihat Saldo</button>
+
     <script>
-        // Ambil saldo dari API
+        // Fungsi untuk mengambil saldo berdasarkan user_id
         function fetchSaldo() {
-            fetch('/api/get_balance')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('saldo').innerText = data.saldo;
-                })
-                .catch(error => console.error('Error fetching saldo:', error));
+            const userId = document.getElementById('user_id').value;
+            if (userId) {
+                fetch(`/api/get_balance?user_id=${userId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.saldo) {
+                            document.getElementById('saldo').innerText = data.saldo;
+                        } else {
+                            document.getElementById('saldo').innerText = "Saldo tidak ditemukan.";
+                        }
+                    })
+                    .catch(error => console.error('Error fetching saldo:', error));
+            } else {
+                alert("User ID harus diisi.");
+            }
         }
-
-        // Ambil saldo pertama kali saat halaman dimuat
-        fetchSaldo();
-
-        // Update saldo setiap 10 detik
-        setInterval(fetchSaldo, 10000);  // Setiap 10 detik
     </script>
 </body>
 </html>
