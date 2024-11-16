@@ -1,38 +1,25 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 
 app = Flask(__name__)
 
-# Fungsi untuk mengambil saldo CryptoTab
-def get_crypto_balance():
+# Fungsi untuk mengambil saldo CryptoTab berdasarkan user_id
+def get_crypto_balance(user_id):
     chrome_options = Options()
     chrome_options.add_argument("--headless")  # Jalankan tanpa tampilan
     driver = webdriver.Chrome(options=chrome_options)
 
-    # Akses CryptoTab dan login
-    driver.get('https://cryptotab.net')
+    # Gunakan URL dengan ID pengguna yang relevan
+    driver.get(f'https://cryptotabbrowser.com/{user_id}')  # Link berdasarkan user_id yang diberikan
     time.sleep(5)  # Tunggu halaman memuat
 
-    # Login ke akun
-    login_button = driver.find_element_by_xpath("//button[text()='Login']")
-    login_button.click()
-
-    time.sleep(2)
-
-    username_field = driver.find_element_by_id("username")
-    password_field = driver.find_element_by_id("password")
-    username_field.send_keys('your_username')  # Gantilah dengan username Anda
-    password_field.send_keys('your_password')  # Gantilah dengan password Anda
-
-    submit_button = driver.find_element_by_xpath("//button[text()='Login']")
-    submit_button.click()
-
-    time.sleep(5)
-
     # Ambil saldo (gantilah ID elemen saldo yang relevan)
-    balance = driver.find_element_by_id('balance_id').text  # Sesuaikan ID elemen saldo
+    try:
+        balance = driver.find_element_by_id('balance_id').text  # Sesuaikan ID elemen saldo
+    except:
+        balance = "Gagal mengambil saldo"
     driver.quit()
 
     return balance
@@ -41,10 +28,14 @@ def get_crypto_balance():
 def index():
     return render_template('index.html')
 
-@app.route('/api/get_balance')
+@app.route('/api/get_balance', methods=['GET'])
 def get_balance():
-    balance = get_crypto_balance()
-    return jsonify({'saldo': balance})
+    user_id = request.args.get('user_id')  # Ambil ID pengguna dari parameter URL
+    if user_id:
+        balance = get_crypto_balance(user_id)
+        return jsonify({'saldo': balance})
+    else:
+        return jsonify({'error': 'User ID tidak diberikan'}), 400
 
 if __name__ == "__main__":
     app.run(debug=True)
