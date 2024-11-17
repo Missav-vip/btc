@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vimeo Video Banner</title>
     <style>
-        body {
+        /* Menghilangkan margin dan padding default */
+        body, html {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            overflow: hidden; /* Menghindari scroll */
+            height: 100%;
         }
 
-        /* Banner Video yang akan mengisi seluruh layar */
+        /* Mengatur video agar mengisi seluruh layar */
         .banner {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100vh; /* Menetapkan tinggi banner seukuran layar */
+            height: 100%;
+            overflow: hidden;
         }
 
         /* Menampilkan iframe (video) dalam banner */
@@ -27,18 +30,6 @@
             width: 100%;
             height: 100%;
             border: none; /* Menghilangkan border */
-        }
-
-        /* Gaya untuk elemen lainnya jika diperlukan */
-        .content {
-            position: absolute;
-            top: 50%; /* Menempatkan konten di tengah */
-            left: 50%;
-            transform: translate(-50%, -50%); /* Membuat konten berada di tengah */
-            color: white;
-            font-size: 24px;
-            text-align: center;
-            z-index: 10; /* Agar konten terlihat di atas video */
         }
     </style>
 </head>
@@ -51,12 +42,6 @@
             allow="autoplay; fullscreen" 
             allowfullscreen>
     </iframe>
-
-    <!-- Konten tambahan jika diinginkan (seperti teks di atas video) -->
-    <div class="content">
-        <h1>Selamat Datang di Website Kami</h1>
-        <p>Menikmati Video Banner di Layar Penuh</p>
-    </div>
 </div>
 
 </body>
