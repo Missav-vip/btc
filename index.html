@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vimeo Video Banner</title>
+    <title>Playlist YouTube Full-Screen</title>
     <style>
         /* Menghilangkan margin dan padding default */
         body, html {
@@ -12,53 +12,72 @@
             height: 100%;
         }
 
-        /* Banner video yang mengisi seluruh layar */
-        .banner {
-            position: relative;
-            width: 100%;
-            height: 100vh; /* Menggunakan seluruh tinggi layar */
-            overflow: hidden;
-        }
-
-        /* Menampilkan video dalam iframe */
-        iframe {
+        /* Mengatur iframe agar mengisi seluruh layar */
+        #player {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none; /* Menghilangkan border */
+            border: none;
         }
 
-        /* Gambar di bawah banner */
-        .image-container {
+        body {
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
-            margin-top: 20px;
-        }
-
-        .image-container img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
         }
     </style>
 </head>
 <body>
 
-<!-- Banner Video di atas halaman -->
-<div class="banner">
-    <iframe src="https://player.vimeo.com/video/1030385107?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0" 
-            frameborder="0" 
-            allow="autoplay; fullscreen" 
-            allowfullscreen>
-    </iframe>
-</div>
+<!-- Kontainer untuk video YouTube -->
+<div id="player"></div>
 
-<!-- Gambar di bawah banner -->
-<div class="image-container">
-    <img src="https://via.placeholder.com/1200x400" alt="Gambar Banner 1">
-</div>
+<!-- YouTube API untuk embed playlist -->
+<script>
+    // Memuat API YouTube
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Fungsi yang akan dipanggil saat API siap
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '100%',  // Mengatur tinggi menjadi 100% layar
+            width: '100%',   // Mengatur lebar menjadi 100% layar
+            videoId: 'dQw4w9WgXcQ', // Video default yang pertama, nanti diganti dengan playlist
+            playerVars: {
+                'playlist': 'PLmeMnjLK2plF0KqeYKG7OjsA5FEGODMh0', // ID playlist yang diberikan
+                'autoplay': 1, // Mulai otomatis
+                'mute': 1, // Video tanpa suara
+                'loop': 1, // Loop video
+                'rel': 0, // Tidak menampilkan video terkait
+                'showinfo': 0, // Menyembunyikan info video
+                'controls': 0, // Menyembunyikan kontrol video
+                'modestbranding': 1, // Mengurangi branding YouTube
+                'fs': 0 // Menyembunyikan tombol full-screen
+            },
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // Fungsi yang dipanggil saat status pemutaran video berubah
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+            // Video selesai, mulai lagi
+            player.playVideo();
+        }
+    }
+</script>
 
 </body>
 </html>
