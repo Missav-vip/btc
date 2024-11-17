@@ -3,80 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playlist YouTube Full-Screen</title>
+    <title>1000 Kotak Video YouTube</title>
     <style>
-        /* Menghilangkan margin dan padding default */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+        /* Mengatur tampilan kotak video */
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        /* Mengatur iframe agar mengisi seluruh layar */
+        .video-thumbnail {
+            width: 120px;
+            height: 90px;
+            cursor: pointer;
+            border: 2px solid #ccc;
+        }
+
+        /* Menyembunyikan iframe player */
         #player {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            background: #000;
+            display: none;
         }
 
+        /* Mengatur latar belakang dan teks */
         body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #000;
+        }
+
+        /* Menampilkan video secara full-screen */
+        #player iframe {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
 
-<!-- Kontainer untuk video YouTube -->
-<div id="player"></div>
+<!-- Pemutar Video YouTube (disembunyikan hingga dipilih video) -->
+<div id="player">
+    <iframe id="youtube-player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
-<!-- YouTube API untuk embed playlist -->
+<!-- Kontainer untuk 1000 Kotak Video -->
+<div class="video-container" id="video-thumbnails"></div>
+
 <script>
-    // Memuat API YouTube
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// Playlist ID YouTube
+const playlistId = 'PLmeMnjLK2plF0KqeYKG7OjsA5FEGODMh0'; // Ganti dengan playlist Anda
 
-    // Fungsi yang akan dipanggil saat API siap
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '100%',  // Mengatur tinggi menjadi 100% layar
-            width: '100%',   // Mengatur lebar menjadi 100% layar
-            videoId: 'dQw4w9WgXcQ', // Video default yang pertama, nanti diganti dengan playlist
-            playerVars: {
-                'playlist': 'PLmeMnjLK2plF0KqeYKG7OjsA5FEGODMh0', // ID playlist yang diberikan
-                'autoplay': 1, // Mulai otomatis
-                'mute': 1, // Video tanpa suara
-                'loop': 1, // Loop video
-                'rel': 0, // Tidak menampilkan video terkait
-                'showinfo': 0, // Menyembunyikan info video
-                'controls': 0, // Menyembunyikan kontrol video
-                'modestbranding': 1, // Mengurangi branding YouTube
-                'fs': 0 // Menyembunyikan tombol full-screen
-            },
-            events: {
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }
+// Mendapatkan data playlist YouTube
+const apiKey = 'YOUR_YOUTUBE_API_KEY';  // Ganti dengan API Key Anda
+const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=${playlistId}&key=${apiKey}`;
 
-    // Fungsi yang dipanggil saat status pemutaran video berubah
-    function onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.ENDED) {
-            // Video selesai, mulai lagi
-            player.playVideo();
+// Mengambil data video dari API YouTube
+fetch(playlistUrl)
+    .then(response => response.json())
+    .then(data => {
+        const videoItems = data.items;
+        
+        // Fungsi untuk membuat 1000 kotak video
+        const thumbnailsContainer = document.getElementById('video-thumbnails');
+        
+        for (let i = 0; i < 1000; i++) {
+            const randomVideo = videoItems[Math.floor(Math.random() * videoItems.length)]; // Memilih video secara acak
+            const thumbnailUrl = randomVideo.snippet.thumbnails.medium.url;
+            const videoId = randomVideo.snippet.resourceId.videoId;
+
+            // Membuat elemen gambar dan menambahkannya ke halaman
+            const thumbnailElement = document.createElement('img');
+            thumbnailElement.src = thumbnailUrl;
+            thumbnailElement.classList.add('video-thumbnail');
+            thumbnailElement.onclick = () => playVideo(videoId);
+            thumbnailsContainer.appendChild(thumbnailElement);
         }
-    }
+    })
+    .catch(error => console.error('Error fetching data from YouTube API:', error));
+
+// Fungsi untuk memutar video
+function playVideo(videoId) {
+    const player = document.getElementById('player');
+    const iframe = document.getElementById('youtube-player');
+    
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+    player.style.display = 'block';
+}
+
+// Menutup pemutar video saat diklik
+document.getElementById('player').onclick = function () {
+    this.style.display = 'none';
+    document.getElementById('youtube-player').src = '';
+};
 </script>
 
 </body>
