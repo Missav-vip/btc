@@ -3,51 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banner Video</title>
+    <title>Vimeo Banner Video</title>
     <style>
-        /* Mengatur body dan menghapus margin dan padding */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Agar tidak ada scroll bar */
+            overflow: hidden; /* Menghindari scroll */
         }
 
-        /* Menata elemen video agar memenuhi layar */
-        video {
-            object-fit: cover; /* Agar video mengisi seluruh area banner */
-            width: 100%; /* Lebar video 100% dari kontainer */
-            height: 100%; /* Tinggi video 100% dari kontainer */
-            position: absolute; /* Menempatkan video di posisi absolute dalam div */
-            top: 0; /* Di bagian atas kontainer */
-            left: 0; /* Di bagian kiri kontainer */
-        }
-
-        /* Kontainer untuk banner video */
-        .banner {
-            position: relative;
-            width: 100%;
-            height: 100vh; /* Menetapkan tinggi banner 100% dari tinggi viewport */
-        }
-
-        /* Menghilangkan kontrol pada video dan memastikan video otomatis diputar */
         iframe {
-            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100%;
-            position: relative;
+            height: 100vh; /* Banner mengisi seluruh layar */
         }
     </style>
 </head>
 <body>
 
-<!-- Banner Video di atas halaman -->
-<div class="banner">
-    <video autoplay loop muted>
-        <source src="https://player.vimeo.com/video/1030385107?autoplay=1&loop=1" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-</div>
+<!-- Video dari Vimeo -->
+<iframe src="https://player.vimeo.com/video/1030385107?autoplay=1&loop=1" 
+        frameborder="0" 
+        allow="autoplay; fullscreen" 
+        allowfullscreen></iframe>
 
 </body>
 </html>
