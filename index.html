@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Banner Example</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-    .banner {
-      width: 100%;
-      height: 100vh; /* 100% of the viewport height */
-      position: relative;
-      overflow: hidden;
-    }
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-size: 2rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner Video</title>
+    <style>
+        /* Mengatur body dan menghapus margin dan padding */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Agar tidak ada scroll bar */
+        }
+
+        /* Menata elemen video agar memenuhi layar */
+        video {
+            object-fit: cover; /* Agar video mengisi seluruh area banner */
+            width: 100%; /* Lebar video 100% dari kontainer */
+            height: 100%; /* Tinggi video 100% dari kontainer */
+            position: absolute; /* Menempatkan video di posisi absolute dalam div */
+            top: 0; /* Di bagian atas kontainer */
+            left: 0; /* Di bagian kiri kontainer */
+        }
+
+        /* Kontainer untuk banner video */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Menetapkan tinggi banner 100% dari tinggi viewport */
+        }
+
+        /* Menghilangkan kontrol pada video dan memastikan video otomatis diputar */
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+    </style>
 </head>
 <body>
-  <div class="banner">
+
+<!-- Banner Video di atas halaman -->
+<div class="banner">
     <video autoplay loop muted>
-      <source src="https://github.com/Missav-vip/btc/raw/7e7e293c2ac387b2c66b5d096bbd78af19c8600d/Vvp.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+        <source src="https://player.vimeo.com/video/1030385107?autoplay=1&loop=1" type="video/mp4">
+        Your browser does not support the video tag.
     </video>
-    <div class="content">
-      <h1>Welcome to My Website</h1>
-      <p>Explore and learn more</p>
-    </div>
-  </div>
+</div>
+
 </body>
 </html>
